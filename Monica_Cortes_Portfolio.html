@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mónica Cortés — PM Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-mid: #3a3a3a;
+    --ink-light: #7a7a7a;
+    --paper: #faf9f6;
+    --paper-warm: #f3f0ea;
+    --accent: #1a4fd6;
+    --accent-light: #e8eeff;
+    --gold: #c8963e;
+    --rule: #ddd8d0;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
+  }
+  .hero-left {
+    background: var(--ink);
+    padding: 8vw 6vw 6vw;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -20%; right: -20%;
+    width: 60%; padding-bottom: 60%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,79,214,0.25) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-tagline {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    max-width: 380px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    border-left: 2px solid var(--gold);
+    padding-left: 1rem;
+  }
+  .hero-contact {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .hero-contact a {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-family: var(--mono);
+    transition: color 0.2s;
+  }
+  .hero-contact a:hover { color: white; }
+
+  .hero-right {
+    background: var(--paper-warm);
+    padding: 8vw 6vw 6vw;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    margin-bottom: 3rem;
+  }
+  .stat {
+    background: white;
+    padding: 1.5rem;
+  }
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+  }
+  .hero-skills {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .skill-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--rule);
+    background: white;
+    color: var(--ink-mid);
+    border-radius: 2px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5vw; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px;
+    height: 1px; background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .section-intro {
+    font-size: 1rem;
+    color: var(--ink-light);
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+    line-height: 1.75;
+  }
+
+  /* ── HOW I WORK ── */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+  }
+  .how-item {
+    background: var(--paper);
+    padding: 2rem 1.75rem;
+  }
+  .how-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .how-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .how-text {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── METRICS BAR ── */
+  .metrics-bar {
+    background: var(--ink);
+    padding: 3rem 5vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+  }
+  .metric {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .metric:last-child { border-right: none; }
+  .metric-num {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+  .metric-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+
+  /* ── CASE STUDIES ── */
+  .cases-bg { background: var(--paper-warm); }
+
+  .case-card {
+    background: white;
+    margin-bottom: 1px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 320px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+  .case-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+  .case-sidebar {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .case-sidebar::after {
+    content: attr(data-num);
+    position: absolute;
+    bottom: -1rem; right: -0.5rem;
+    font-family: var(--serif);
+    font-size: 8rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .case-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .case-client {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: white;
+    line-height: 1.3;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+  }
+  .case-type {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .case-body {
+    padding: 2.5rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .case-section-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .case-h {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0.35rem;
+  }
+  .case-p {
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    line-height: 1.6;
+  }
+  .case-results {
+    grid-column: 1 / -1;
+    background: var(--accent-light);
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--accent);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .result-item { }
+  .result-num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.15rem;
+  }
+  .result-label {
+    font-size: 0.72rem;
+    color: var(--ink-mid);
+    line-height: 1.3;
+  }
+
+  /* ── TOOLS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+  }
+  .tool-item {
+    background: var(--paper);
+    padding: 2rem;
+  }
+  .tool-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+  .tool-use {
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+  .tool-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  /* ── CLOSING ── */
+  .closing { background: var(--ink); color: white; }
+  .closing .section-title { color: white; }
+  .closing .section-intro { color: rgba(255,255,255,0.5); max-width: 100%; }
+  .differentiators {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 3rem;
+  }
+  .diff-item {
+    background: rgba(255,255,255,0.03);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+  .diff-item:hover { background: rgba(255,255,255,0.06); }
+  .diff-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .diff-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+  .diff-text {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+  }
+  .cta-bar {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(26,79,214,0.15);
+    border: 1px solid rgba(26,79,214,0.3);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta-text {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: white;
+    font-style: italic;
+  }
+  .cta-contact {
+    display: flex; flex-direction: column; gap: 0.3rem; text-align: right;
+  }
+  .cta-contact a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .cta-contact a:hover { color: white; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080808;
+    padding: 1.5rem 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer span {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { min-height: 60vh; }
+    .how-grid, .tools-grid { grid-template-columns: 1fr 1fr; }
+    .case-card { grid-template-columns: 1fr; }
+    .case-sidebar { min-height: 140px; }
+    .metrics-bar { grid-template-columns: 1fr 1fr; }
+    .differentiators { grid-template-columns: 1fr; }
+    .cta-bar { flex-direction: column; text-align: center; }
+    .cta-contact { text-align: center; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Mónica Cortés</a>
+  <ul class="nav-links">
+    <li><a href="#how-i-work">Approach</a></li>
+    <li><a href="#cases">Case Studies</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#closing">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">PM Portfolio · Digital Marketing & CX</div>
+    <h1 class="hero-name">Mónica<br><em>Cortés</em></h1>
+    <p class="hero-tagline">I don't just manage projects — I build the systems that make them run.</p>
+    <div class="hero-contact">
+      <a href="mailto:monica.rodco@gmail.com">monica.rodco@gmail.com</a>
+      <a href="#">+52 33 1303 2323</a>
+      <a href="#">Guadalajara, Mexico · English C1 / Spanish Native</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">9+</div>
+        <div class="stat-label">Concurrent projects managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">8</div>
+        <div class="stat-label">New projects from support insights</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">105%</div>
+        <div class="stat-label">Ticket resolution rate</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">50%</div>
+        <div class="stat-label">B2B platform adoption, year one</div>
+      </div>
+    </div>
+    <div class="hero-skills">
+      <span class="skill-tag">Project Management</span>
+      <span class="skill-tag">Digital Marketing</span>
+      <span class="skill-tag">Salesforce</span>
+      <span class="skill-tag">eCommerce</span>
+      <span class="skill-tag">Stakeholder Management</span>
+      <span class="skill-tag">Agile / Scrum</span>
+      <span class="skill-tag">CX Operations</span>
+      <span class="skill-tag">No-Code / AI</span>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS BAR -->
+<div class="metrics-bar">
+  <div class="metric">
+    <div class="metric-num">10–15%</div>
+    <div class="metric-desc">ROI improvement through quarterly performance optimization</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">10%</div>
+    <div class="metric-desc">SLA compliance improvement after implementing tracking systems</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">40%</div>
+    <div class="metric-desc">Marketing budget shifted to digital in year one</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">4</div>
+    <div class="metric-desc">Organizations aligned simultaneously on a single campaign delivery</div>
+  </div>
+</div>
+
+<!-- HOW I WORK -->
+<section id="how-i-work">
+  <div class="section-label">Approach</div>
+  <h2 class="section-title">How I Work</h2>
+  <p class="section-intro">Hybrid methodology — structured enough for clear milestones, flexible enough to absorb change without losing direction.</p>
+
+  <div class="how-grid">
+    <div class="how-item">
+      <div class="how-icon">🗺️</div>
+      <div class="how-title">Dependencies</div>
+      <div class="how-text">Mapped early, tagged in Jira, reviewed every standup. I surface blockers before they become delays — not after.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">⚖️</div>
+      <div class="how-title">Scope Changes</div>
+      <div class="how-text">I don't say yes or no — I show the impact. Time, effort, trade-offs. The decision stays with the client, not absorbed silently.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">🚨</div>
+      <div class="how-title">Delays</div>
+      <div class="how-text">Escalated early, always with a recovery plan. By the time most PMs flag a delay, I've already proposed the path forward.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">🔗</div>
+      <div class="how-title">Alignment</div>
+      <div class="how-text">I bridge business, marketing, and technical teams. Translate requirements into specs, and specs back into business language.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">📊</div>
+      <div class="how-title">Measurement</div>
+      <div class="how-text">KPIs designed at the start: delivery, quality, operational, and business metrics. Success is defined before work begins.</div>
+    </div>
+    <div class="how-item">
+      <div class="how-icon">🤖</div>
+      <div class="how-title">AI-Augmented</div>
+      <div class="how-text">No-code tools, automated reporting, AI-assisted documentation. I build systems that run themselves, not just manage tasks manually.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases" class="cases-bg">
+  <div class="section-label">Work</div>
+  <h2 class="section-title">Case Studies</h2>
+  <p class="section-intro">Four projects. Four different types of complexity. One consistent outcome: delivered.</p>
+
+  <!-- Case 1 -->
+  <div class="case-card">
+    <div class="case-sidebar" data-num="01">
+      <div class="case-num">Case 01</div>
+      <div>
+        <div class="case-client">Industrial Tools Manufacturer</div>
+        <div class="case-type">Marketing Strategy · B2B · National Mexico</div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <div class="case-section-label">Challenge</div>
+        <div class="case-h">From traditional to digital-led marketing</div>
+        <div class="case-p">A B2B brand with strong market presence but zero digital strategy. Marketing was reactive — producing materials for sales, organizing events, no structure, no tracking.</div>
+      </div>
+      <div>
+        <div class="case-section-label">What I Did</div>
+        <div class="case-h">Built the marketing engine from scratch</div>
+        <div class="case-p">Annual marketing plan, 360° campaigns (ATL, BTL, digital), content approval workflow, performance dashboard, 2–3 national trade shows per year, quarterly executive reviews with full data.</div>
+      </div>
+      <div class="case-results">
+        <div class="result-item">
+          <div class="result-num">10–15%</div>
+          <div class="result-label">ROI improvement through quarterly optimization</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">40%</div>
+          <div class="result-label">Budget shifted to digital in year one</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">0</div>
+          <div class="result-label">Brand inconsistency incidents after framework implementation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 2 -->
+  <div class="case-card">
+    <div class="case-sidebar" data-num="02">
+      <div class="case-num">Case 02</div>
+      <div>
+        <div class="case-client">B2B Digital Commerce</div>
+        <div class="case-type">Platform Implementation · Change Management</div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <div class="case-section-label">Challenge</div>
+        <div class="case-h">Replace manual orders with a digital platform</div>
+        <div class="case-p">100+ distributors ordering by phone, WhatsApp, and email. The platform worked. The problem: a relationship-driven distributor base that didn't want to change, and a sales team that felt threatened.</div>
+      </div>
+      <div>
+        <div class="case-section-label">What I Did</div>
+        <div class="case-h">Adoption strategy before a single line of training</div>
+        <div class="case-p">Segmented distributors by readiness, co-designed onboarding flow with vendor, created training materials, repositioned the platform to the sales team as a strategic tool — not a replacement.</div>
+      </div>
+      <div class="case-results">
+        <div class="result-item">
+          <div class="result-num">50%</div>
+          <div class="result-label">Distributor adoption in year one — above target</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">↓</div>
+          <div class="result-label">Significant reduction in manual order processing load</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">✓</div>
+          <div class="result-label">Sales team became active platform advocates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 3 -->
+  <div class="case-card">
+    <div class="case-sidebar" data-num="03">
+      <div class="case-num">Case 03</div>
+      <div>
+        <div class="case-client">Leading Mexican Consumer Brand</div>
+        <div class="case-type">Salesforce Marketing Cloud · Campaign Tech</div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <div class="case-section-label">Challenge</div>
+        <div class="case-h">Build chatbot + journeys + integrations under deadline</div>
+        <div class="case-p">4 organizations. A campaign concept from the agency, business requirements from the client, platform constraints from the tech team — and none of them speaking the same language. Clock running.</div>
+      </div>
+      <div>
+        <div class="case-section-label">What I Did</div>
+        <div class="case-h">Became the connective layer that unblocked the project</div>
+        <div class="case-p">Translated concept → functional requirements → Salesforce architecture. Facilitated alignment sessions, locked a shared requirements doc, defined Journey Builder architecture, ran daily sprints once scope was clear.</div>
+      </div>
+      <div class="case-results">
+        <div class="result-item">
+          <div class="result-num">On time</div>
+          <div class="result-label">Launched on schedule despite delayed exploration phase</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">4</div>
+          <div class="result-label">Organizations aligned with no escalations post-alignment</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">✓</div>
+          <div class="result-label">Full solution: bot + journeys + integrations, validated before go-live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case 4 -->
+  <div class="case-card">
+    <div class="case-sidebar" data-num="04" style="background: #1a4fd6;">
+      <div class="case-num">Case 04</div>
+      <div>
+        <div class="case-client">Global Sportswear Brand LATAM</div>
+        <div class="case-type">eCommerce Ops · Chile & Peru · Strategic Growth</div>
+      </div>
+    </div>
+    <div class="case-body">
+      <div>
+        <div class="case-section-label">Challenge</div>
+        <div class="case-h">Reactive support operation, zero visibility</div>
+        <div class="case-p">One Excel file. A basic ticketing tool. No SLA. No dashboards. No way to know if the team was performing. Two markets (Chile & Peru) with no unified view — and a support queue full of signals nobody was reading.</div>
+      </div>
+      <div>
+        <div class="case-section-label">What I Did</div>
+        <div class="case-h">Built the infrastructure — then turned it into a pipeline</div>
+        <div class="case-p">Custom Base44 tool for ticket assignment, SLA dashboards, automated reporting. Then: systematically reviewed ticket patterns to identify platform gaps and pitched them as structured development projects to the client.</div>
+      </div>
+      <div class="case-results">
+        <div class="result-item">
+          <div class="result-num">105%</div>
+          <div class="result-label">Ticket resolution rate against committed volume</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">8</div>
+          <div class="result-label">New projects initiated from support insights</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">10%</div>
+          <div class="result-label">SLA improvement since new tracking system</div>
+        </div>
+        <div class="result-item">
+          <div class="result-num">Vendor → Partner</div>
+          <div class="result-label">Client relationship shifted to strategic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-label">Stack</div>
+  <h2 class="section-title">Tools & Artifacts</h2>
+  <p class="section-intro">How I run projects day-to-day.</p>
+
+  <div class="tools-grid">
+    <div class="tool-item">
+      <div class="tool-name">Jira</div>
+      <div class="tool-use">Sprint management, backlog prioritization, custom dashboards per project. Stakeholders see status without needing a meeting.</div>
+      <span class="tool-tag">Project Tracking</span>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Notion</div>
+      <div class="tool-use">Project wikis, requirements docs, decision logs, status pages. Institutional memory that outlives any standup.</div>
+      <span class="tool-tag">Documentation</span>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Base44 / Lovable</div>
+      <div class="tool-use">Custom no-code tools for real operational problems — like the ticket management system built for a global eCommerce client from scratch.</div>
+      <span class="tool-tag">No-Code Build</span>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Excel / Google Sheets</div>
+      <div class="tool-use">Gantt charts, resource planning, SLA tracking, performance dashboards — built from scratch per project, not from templates.</div>
+      <span class="tool-tag">Analysis & Reporting</span>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Salesforce Ecosystem</div>
+      <div class="tool-use">Sales Cloud, SFCC, Marketing Cloud (Journey Builder, automation, integrations). Platform Admin certification in progress.</div>
+      <span class="tool-tag">CRM & Commerce</span>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">AI Workflows</div>
+      <div class="tool-use">Claude, ChatGPT, Gemini for documentation, reporting, and artifact generation. Not learning how — already doing it in production.</div>
+      <span class="tool-tag">AI-Augmented</span>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing" class="closing">
+  <div class="section-label" style="color: var(--gold);">What Makes Me Different</div>
+  <h2 class="section-title">The PM who reads between the lines.</h2>
+  <p class="section-intro">Most PMs are strong on process or strong on the domain. I bring both — and the instinct to see what the data is actually telling you before anyone asks.</p>
+
+  <div class="differentiators">
+    <div class="diff-item">
+      <div class="diff-icon">🎯</div>
+      <div class="diff-title">Process + Domain</div>
+      <div class="diff-text">Marketing background means I understand what a campaign needs to achieve — not just what the brief says. PM discipline means I build systems that make execution reliable.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon">🔍</div>
+      <div class="diff-title">Strategic Instinct</div>
+      <div class="diff-text">A support queue looked like overhead. I read it as a roadmap — and turned it into 8 active development projects. That's the difference between managing a function and growing one.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon">🌐</div>
+      <div class="diff-title">The Translator</div>
+      <div class="diff-text">Between technical teams and business stakeholders. Between what a client says they want and what the solution needs to be. Between what the data shows and what the team needs to do differently.</div>
+    </div>
+    <div class="diff-item">
+      <div class="diff-icon">⚡</div>
+      <div class="diff-title">Built for Remote</div>
+      <div class="diff-text">International client experience, bilingual (Spanish native / English C1), async-first workflows, AI-augmented systems. Ready to operate at full capacity from day one, anywhere.</div>
+    </div>
+  </div>
+
+  <div class="cta-bar">
+    <div class="cta-text">"Let's build something that runs itself."</div>
+    <div class="cta-contact">
+      <a href="mailto:monica.rodco@gmail.com">monica.rodco@gmail.com</a>
+      <a href="#">+52 33 1303 2323</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Mónica Cortés · PM Portfolio · April 2026</span>
+  <span>Guadalajara, Mexico</span>
+</footer>
+
+</body>
+</html>
